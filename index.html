@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Портфолио: сайты для местного бизнеса</title>
+<meta name="description" content="Два демо-проекта: лендинг детейлинг-студии с онлайн-записью и многостраничный сайт студии пилатеса с расписанием.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* Общая страница портфолио. Тёплый графит, чтобы оба проекта
+   (чёрный «Лак» и пудровая «Опора») смотрелись на ней одинаково хорошо. */
+:root{
+  --bg:#141312; --panel:#1D1B19; --line:rgba(255,255,255,.1);
+  --text:#EFEAE5; --muted:#A79F97; --accent:#D9BEB5;
+  --cham:linear-gradient(100deg,#E0A273 0%,#A688EC 52%,#5ED0DA 100%);
+  --f:'Inter Tight',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --f-big:'Oswald','Arial Narrow',sans-serif;
+  --pad:clamp(1rem,4vw,2.5rem); --wrap:1180px; --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font:400 clamp(1rem,.96rem + .2vw,1.1rem)/1.6 var(--f);overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--pad)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* шапка */
+.top{padding-block:clamp(3.5rem,8vw,7rem) clamp(2.5rem,5vw,4rem)}
+.kicker{font:400 .85rem/1 var(--f-big);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+h1{font:300 clamp(2.6rem,1.2rem + 6vw,6.2rem)/.98 var(--f-big);letter-spacing:-.01em;text-transform:uppercase;margin-top:1.2rem;max-width:14ch}
+h1 span{background:var(--cham);-webkit-background-clip:text;background-clip:text;color:transparent}
+.top p{color:var(--muted);max-width:52ch;margin-top:1.4rem;font-size:clamp(1.02rem,.98rem + .35vw,1.2rem)}
+
+/* проекты */
+.projects{display:grid;gap:clamp(3.5rem,7vw,6rem);padding-bottom:clamp(4rem,8vw,7rem)}
+.proj{display:grid;gap:1.6rem;align-items:center}
+.shots{position:relative;padding-bottom:9%}
+.shot-desk{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(0,0,0,.8)}
+.shot-desk img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .9s var(--ease)}
+.shot-phone{position:absolute;right:4%;bottom:0;width:23%;border-radius:18px;overflow:hidden;border:4px solid #0c0b0a;box-shadow:0 20px 50px -10px rgba(0,0,0,.8)}
+.shot-phone img{width:100%;aspect-ratio:300/649;object-fit:cover}
+.proj:hover .shot-desk img{transform:scale(1.03)}
+.num{font:300 clamp(3rem,2rem + 3vw,5rem)/1 var(--f-big);color:transparent;-webkit-text-stroke:1px rgba(239,234,229,.35)}
+.proj h2{font:400 clamp(1.8rem,1.2rem + 2vw,2.8rem)/1.05 var(--f-big);text-transform:uppercase;margin-top:.6rem}
+.type{color:var(--accent);font-weight:500;margin-top:.4rem}
+.proj ul{list-style:none;padding:0;margin-top:1.2rem;display:grid;gap:.55rem}
+.proj li{position:relative;padding-left:1.3rem;color:#D3CCC5}
+.proj li::before{content:"";position:absolute;left:0;top:.68em;width:.55rem;height:1px;background:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.3rem}
+.tags span{font-size:.8rem;padding:.3rem .7rem;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+
+/* кнопка с выезжающей заливкой, как на самих сайтах */
+.btn{--knob:46px;position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;min-height:50px;margin-top:1.8rem;
+  padding:.7rem 1.4rem .7rem calc(var(--knob) + 1.1rem);border-radius:999px;border:1.5px solid var(--accent);
+  font-weight:600;text-decoration:none;color:var(--text);transition:color .55s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--accent)
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23141312' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat right 13px center/18px;
+  transform:translateX(calc(-100% + var(--knob)));transition:transform .75s var(--ease)}
+.btn:hover,.btn:focus-visible{color:#141312}
+.btn:hover::before,.btn:focus-visible::before{transform:none}
+
+@media (min-width:900px){
+  .proj{grid-template-columns:1.25fr 1fr;gap:4rem}
+  .proj:nth-child(even) .shots{order:2}
+}
+
+.foot{border-top:1px solid var(--line);padding-block:2.2rem 3rem;color:var(--muted);font-size:.9rem}
+.foot p{max-width:70ch}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important}}
+</style>
+</head>
+<body>
+<main>
+  <header class="top wrap">
+    <p class="kicker">Портфолио</p>
+    <h1>Сайты, на которых <span>записываются</span></h1>
+    <p>Два демо-проекта для местного бизнеса. Каждый работает на телефоне и на компьютере, у каждого онлайн-запись и своя анимация при прокрутке.</p>
+  </header>
+
+  <div class="projects wrap">
+    <article class="proj">
+      <a class="shots" href="luk-detailing/" aria-label="Открыть сайт «Лак»">
+        <div class="shot-desk"><img src="covers/luk.webp" width="1200" height="750" alt="Первый экран сайта «Лак» на компьютере: чёрный кузов и заголовок с переливом"></div>
+        <div class="shot-phone"><img src="covers/luk-phone.webp" width="300" height="649" alt="Тот же сайт на телефоне" loading="lazy"></div>
+      </a>
+      <div>
+        <p class="num" aria-hidden="true">01</p>
+        <h2>«Лак»</h2>
+        <p class="type">Лендинг детейлинг-студии</p>
+        <ul>
+          <li>Видео на первом экране и плавный переход ко второму слайду при прокрутке</li>
+          <li>Ползунок «до и после», цены по классам машин, ответы на частые вопросы</li>
+          <li>Форма записи на бесплатный осмотр, на телефоне кнопка записи всегда под рукой</li>
+        </ul>
+        <div class="tags"><span>Одна страница</span><span>Тёмная тема</span><span>Анимация на CSS</span></div>
+        <a class="btn" href="luk-detailing/">Открыть сайт</a>
+      </div>
+    </article>
+
+    <article class="proj">
+      <a class="shots" href="opora-studio/" aria-label="Открыть сайт «Опора»">
+        <div class="shot-desk"><img src="covers/opora.webp" width="1200" height="750" alt="Первый экран сайта «Опора» на компьютере: девушка на коврике и крупное слово ОПОРА" loading="lazy"></div>
+        <div class="shot-phone"><img src="covers/opora-phone.webp" width="300" height="649" alt="Тот же сайт на телефоне" loading="lazy"></div>
+      </a>
+      <div>
+        <p class="num" aria-hidden="true">02</p>
+        <h2>«Опора»</h2>
+        <p class="type">Сайт студии пилатеса и йоги, 6 страниц</p>
+        <ul>
+          <li>Расписание с фильтром по дню и направлению, ссылку с фильтром можно отправить другу</li>
+          <li>Ближайшие занятия считаются от текущего времени, запись в одно нажатие</li>
+          <li>Направления, тренеры, цены и контакты с понятным маршрутом</li>
+        </ul>
+        <div class="tags"><span>Многостраничный</span><span>Светлая тёплая тема</span><span>Расписание на JS</span></div>
+        <a class="btn" href="opora-studio/">Открыть сайт</a>
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p>Компании «Лак» и «Опора» вымышлены, сайты сделаны для портфолио. Телефоны ненастоящие, заявки никуда не уходят. Фото: Unsplash, видео: Pexels, авторы указаны на каждом сайте в файле photo-credits.md.</p>
+  </div>
+</footer>
+</body>
+</html>

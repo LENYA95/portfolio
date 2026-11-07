@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>«Лак», детейлинг-студия в Твери: полировка, керамика, химчистка</title>
+<meta name="description" content="Полировка кузова, керамика, химчистка салона и защитная плёнка в Твери. Бесплатный осмотр с замером лака за 20 минут.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+/* «Лак», вариант 3: чёрный фон и перелив «хамелеон», как у перламутровой автокраски */
+:root{
+  --bg:#0B0D10;          /* чёрный лак */
+  --panel:#14171C;       /* графит */
+  --panel-2:#1B1F26;
+  --text:#ECEFF2;
+  --muted:#A3ABB5;
+  --line:rgba(255,255,255,.1);
+  --copper:#E0A273;      /* хамелеон: медь */
+  --violet:#A688EC;      /*           фиолет */
+  --teal:#5ED0DA;        /*           бирюза */
+  --cham:linear-gradient(100deg,var(--copper) 0%,var(--violet) 52%,var(--teal) 100%);
+  --f:'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --step-hero:clamp(2.1rem, 1rem + 4.4vw, 4.4rem);
+  --step-h2:clamp(1.6rem, 1rem + 2.2vw, 2.8rem);
+  --step-h3:clamp(1.1rem, 1rem + .5vw, 1.4rem);
+  --step-body:clamp(.98rem, .95rem + .2vw, 1.1rem);
+  --space:clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  --wrap:1240px;
+  --pad:clamp(1.1rem, 4vw, 2.5rem);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-u:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font:400 var(--step-body)/1.65 var(--f);overflow-x:hidden}
+img,video{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f);line-height:1.08;letter-spacing:-.01em}
+h1{font-weight:800;text-transform:uppercase}
+h2{font-size:var(--step-h2);font-weight:800;text-transform:uppercase;max-width:22ch}
+h3{font-size:var(--step-h3);font-weight:600;line-height:1.2}
+p{max-width:62ch}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--pad)}
+.section{padding-block:var(--space)}
+.lead{font-size:clamp(1.02rem,.98rem + .35vw,1.2rem);color:var(--muted);margin-top:1rem}
+.muted{color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:1rem;top:-4rem;background:#fff;color:#000;padding:.7rem 1rem;z-index:200}
+.skip:focus{top:1rem}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.icon{width:1.25em;height:1.25em;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* текст с переливом «хамелеон» */
+.cham{background:var(--cham);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (forced-colors:active){.cham{color:CanvasText;background:none}}
+
+/* ---------- кнопка: Slide Arrow Button (Animata) + свечение ----------
+   Кружок со стрелкой растягивается на всю кнопку, текст темнеет.
+   Рамка с переливом, мягкое свечение и редкий блик (только transform). */
+.btn{
+  --knob:50px;
+  position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;
+  min-height:54px;padding:.9rem 2.9rem .9rem calc(var(--knob) + 1.1rem);border-radius:999px;cursor:pointer;text-decoration:none;
+  border:1.5px solid transparent;
+  background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--cham) border-box;
+  color:var(--text);font:600 1rem/1.2 var(--f);letter-spacing:.02em;white-space:nowrap;
+  box-shadow:0 10px 34px -10px rgba(166,136,236,.65),0 0 46px -14px rgba(94,208,218,.6);
+  transition:color .3s var(--ease);
+}
+.btn::before{
+  content:"";position:absolute;inset:0;border-radius:999px;z-index:-1;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B0D10' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat right 15px center / 20px,var(--cham);
+  transform:translateX(calc(-100% + var(--knob)));transition:transform .5s var(--ease);
+}
+.btn::after{ /* блик раз в несколько секунд */
+  content:"";position:absolute;top:0;bottom:0;left:0;width:40%;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:translateX(-160%) skewX(-18deg);animation:shine 5s var(--ease) 1.5s infinite;
+}
+@keyframes shine{0%,62%{transform:translateX(-160%) skewX(-18deg)}100%{transform:translateX(360%) skewX(-18deg)}}
+.btn:hover,.btn:focus-visible{color:var(--bg)}
+.btn:hover::before,.btn:focus-visible::before{transform:translateX(0)}
+.btn:focus-visible{outline-color:#fff}
+.btn[disabled]{opacity:.7;cursor:progress}
+.btn--sm{--knob:42px;min-height:44px;padding:.55rem 2.5rem .55rem calc(var(--knob) + .8rem);font-size:.92rem}
+.btn--ghost{ /* вторая кнопка: стеклянная, без кружка */
+  padding:.9rem 1.8rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.28);box-shadow:none;backdrop-filter:blur(6px)}
+.btn--ghost::before,.btn--ghost::after{display:none}
+.btn--ghost:hover{color:var(--text);background:rgba(255,255,255,.12)}
+
+/* ---------- Underline Hover Text (Animata): линия растёт от центра ---------- */
+.u-link{position:relative;display:inline-block;padding:0 .1rem .35rem;text-decoration:none;font-weight:500;transition:transform .5s var(--ease-u)}
+.u-link::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;opacity:.25}
+.u-link::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;border-radius:3px;background:var(--cham);transform:scaleX(0);transition:transform .5s var(--ease-u)}
+.u-link:hover{transform:translateY(-2px)}
+.u-link:hover::after,.u-link:focus-visible::after,.u-link[aria-current="true"]::after{transform:scaleX(1)}
+
+/* ---------- Sibling Focus Nav (Animata): соседние пункты гаснут ---------- */
+.sib{display:flex;flex-wrap:wrap;align-items:center}
+.sib > a{display:inline-flex;align-items:center;min-height:44px;transition:opacity .2s ease-out, transform .5s var(--ease-u)}
+.sib-x > a:not(:last-child){margin-right:1.6rem}
+.sib-y{flex-direction:column;align-items:flex-start}
+.sib-y > a{min-height:36px}
+.sib:has(> a:hover) > a:not(:hover),.sib:has(> a:focus-visible) > a:not(:focus-visible){opacity:.3}
+
+/* ---------- шапка ---------- */
+.header{position:fixed;inset:0 0 auto 0;z-index:60;transition:background-color .3s, backdrop-filter .3s;border-bottom:1px solid transparent}
+.header.is-solid{background:rgba(11,13,16,.86);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+.header .wrap{display:flex;align-items:center;gap:1.5rem;min-height:76px}
+.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;font:800 1.35rem/1 var(--f);letter-spacing:.18em}
+.logo svg{width:20px;height:20px}
+.logo small{font:500 .7rem/1.2 var(--f);letter-spacing:.06em;color:var(--muted);text-transform:uppercase;max-width:10ch}
+.nav{display:none;margin-left:auto;font-size:.92rem}
+.header-phone{display:flex;align-items:center;gap:.45rem;margin-left:auto;text-decoration:none;font-weight:600;min-height:44px;min-width:44px;justify-content:center;font-size:.95rem}
+.header-phone span{display:none}
+.header .btn--sm{white-space:nowrap}
+@media (min-width:1080px){.nav{display:flex}.header-phone{margin-left:.5rem}.header-phone span{display:inline}}
+@media (max-width:520px){.hide-s{display:none}.logo small{display:none}.header .wrap{gap:.6rem}.header .btn--sm{--knob:36px;padding:.5rem 2.1rem .5rem calc(var(--knob) + .6rem);font-size:.84rem}.header .btn--sm::before{background-size:16px,auto;background-position:right 10px center,0 0}}
+
+/* ---------- первый экран: два слайда ----------
+   Слайд 1 (видео и «Кузов снова блестит») стоит на месте (sticky),
+   слайд 2 («Глубина цвета») наезжает на него снизу карточкой.
+   Пока второй едет, первый чуть отодвигается вглубь и темнеет.
+   Плавность: в Chrome, Edge и Safari анимация привязана к прокрутке
+   средствами самого CSS (animation-timeline) и не нагружает скрипт;
+   в остальных браузерах то же самое делает короткий скрипт.
+   Двигаются только transform и opacity. */
+.intro{position:relative;timeline-scope:--s2}
+.slide1{position:sticky;top:0;z-index:0;min-height:100svh;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;transform-origin:50% 100%}
+.stage-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.stage-veil{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,13,16,.55) 0%,rgba(11,13,16,.2) 30%,rgba(11,13,16,.75) 72%,var(--bg) 100%),
+             linear-gradient(90deg,rgba(11,13,16,.75) 0%,rgba(11,13,16,0) 60%)}
+.slide1-shade{position:absolute;inset:0;z-index:2;background:var(--bg);opacity:0;pointer-events:none}
+.hero-in{width:100%;padding-top:7rem;padding-bottom:2.5rem}
+.slide1 h1{font-size:var(--step-hero);max-width:16ch}
+.slide1 .lead{color:#C9D0D8;max-width:48ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.2rem}
+.hero-stats{list-style:none;padding:1.4rem 0 0;margin-top:3rem;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.hero-stats li{display:flex;gap:.7rem;align-items:flex-start}
+.hero-stats .icon{width:26px;height:26px;color:var(--violet);margin-top:.1rem}
+.hero-stats b{display:block;font-weight:600;font-size:.98rem}
+.hero-stats span{display:block;color:var(--muted);font-size:.82rem;line-height:1.4}
+@media (min-width:960px){.hero-stats{grid-template-columns:repeat(4,1fr)}}
+.video-toggle{position:absolute;right:var(--pad);top:6.2rem;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);
+  background:rgba(11,13,16,.5);color:#fff;display:grid;place-items:center;cursor:pointer}
+.video-toggle .icon{width:18px;height:18px}
+
+/* слайд 2: синий капот, огромный заголовок и контурное слово «ЛАК» */
+.slide2{position:relative;z-index:1;min-height:100svh;display:flex;align-items:center;overflow:hidden;isolation:isolate;
+  background:var(--bg);border-radius:28px 28px 0 0;box-shadow:0 -40px 80px -20px rgba(0,0,0,.85);view-timeline:--s2 block}
+.slide2::before{content:"";position:absolute;left:0;right:0;top:0;height:28px;z-index:3;border-radius:28px 28px 0 0;pointer-events:none;
+  border-top:1.5px solid transparent;background:var(--cham) border-box;
+  -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) padding-box exclude,linear-gradient(#000 0 0)}
+.s2-bg{position:absolute;inset:-12% 0 0;width:100%;height:112%;object-fit:cover;object-position:60% 50%;z-index:-2;max-width:none}
+.s2-veil{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(11,13,16,.92) 0%,rgba(11,13,16,.7) 45%,rgba(11,13,16,.25) 100%),
+             linear-gradient(180deg,rgba(11,13,16,.35) 0%,transparent 30%,transparent 70%,var(--bg) 100%)}
+.slide2 p.chapter-ghost{position:absolute;right:3vw;top:50%;margin:-.4em 0 0;max-width:none;pointer-events:none;
+  font:800 clamp(8rem,21vw,19rem)/.8 var(--f);letter-spacing:-.02em;color:rgba(236,239,242,.04);-webkit-text-stroke:2px rgba(236,239,242,.3)}
+.s2-in{position:relative;z-index:1;width:100%;padding-block:7rem 4rem}
+.chapter-title{font-size:clamp(2.8rem,1rem + 7vw,7.5rem);line-height:.92;letter-spacing:-.03em;max-width:none;color:var(--text)}
+.chapter-title span{display:block}
+.s2-in p{color:#C9D0D8;margin-top:1.4rem;max-width:40ch;font-size:clamp(1rem,.95rem + .3vw,1.15rem)}
+.s2-in .u-link{margin-top:1.4rem;color:var(--text)}
+
+@media (max-width:959px){
+  .video-toggle{top:5.4rem}
+  .hero-in{padding-top:6.5rem;padding-bottom:1.6rem}
+  .slide1{flex-direction:column;align-items:stretch;justify-content:flex-end}
+  .stage-veil{background:linear-gradient(180deg,rgba(11,13,16,.6) 0%,rgba(11,13,16,.5) 35%,rgba(11,13,16,.85) 70%,var(--bg) 100%)}
+  .hero-cta{margin-top:1.6rem;gap:.7rem}
+  .hero-stats{margin-top:1.8rem;padding-top:1.1rem;gap:.9rem 1rem}
+  .slide2{border-radius:22px 22px 0 0;align-items:flex-end}
+  .slide2::before{border-radius:22px 22px 0 0}
+  .s2-bg{object-position:70% 50%}
+  .s2-veil{background:linear-gradient(180deg,rgba(11,13,16,.2) 0%,rgba(11,13,16,.55) 45%,rgba(11,13,16,.92) 75%,var(--bg) 100%)}
+  .slide2 p.chapter-ghost{top:30%;right:-4vw;font-size:clamp(7rem,40vw,12rem)}
+  .s2-in{padding-block:6rem 3.5rem}
+}
+@media (max-width:380px){
+  .hero-stats span{font-size:.78rem}
+  .hero-stats b{font-size:.92rem}
+}
+
+/* сам переход: по прокрутке, пока слайд 2 въезжает в экран */
+@keyframes s1-back{to{transform:scale(.9) translateY(-4%)}}
+@keyframes s1-shade{to{opacity:.8}}
+@keyframes s2-bg{from{transform:translateY(-10%) scale(1.08)}to{transform:none}}
+@keyframes s2-line{from{transform:translateY(55%);opacity:0}to{transform:none;opacity:1}}
+@keyframes s2-ghost{from{transform:translateX(18vw);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .slide1,.slide1-shade,.s2-bg,.chapter-title span,.s2-in > p,.s2-in > .u-link,.slide2 p.chapter-ghost{
+      animation-timing-function:linear;animation-fill-mode:both;animation-duration:1ms;animation-timeline:--s2}
+    .slide1{animation-name:s1-back;animation-range:entry 0% entry 100%}
+    .slide1-shade{animation-name:s1-shade;animation-range:entry 0% entry 100%}
+    .s2-bg{animation-name:s2-bg;animation-range:entry 0% entry 100%}
+    .slide2 p.chapter-ghost{animation-name:s2-ghost;animation-range:entry 15% entry 100%;animation-timing-function:cubic-bezier(.22,1,.36,1)}
+    .chapter-title span{animation-name:s2-line;animation-timing-function:cubic-bezier(.22,1,.36,1)}
+    .chapter-title span:nth-child(1){animation-range:entry 35% entry 85%}
+    .chapter-title span:nth-child(2){animation-range:entry 45% entry 95%}
+    .s2-in > p{animation-name:s2-line;animation-range:entry 55% entry 100%}
+    .s2-in > .u-link{animation-name:s2-line;animation-range:entry 62% entry 100%}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .slide1{position:relative}
+}
+
+/* ---------- остальные экраны въезжают снизу ---------- */
+.scene{position:relative;background:var(--bg);z-index:1}
+.scene-card{border-radius:28px 28px 0 0;box-shadow:0 -30px 60px -20px rgba(0,0,0,.8);margin-top:-28px}
+.scene-card::before{content:"";position:absolute;left:0;right:0;top:0;height:28px;border-radius:28px 28px 0 0;pointer-events:none;
+  border-top:1.5px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,var(--cham) border-box;
+  -webkit-mask:linear-gradient(#000,transparent);mask:linear-gradient(#000,transparent);opacity:.8}
+.scene-inner{transform-origin:50% 0;will-change:transform,opacity}
+
+/* ---------- боль ---------- */
+.pain-grid{display:grid;gap:1rem;margin-top:2.5rem}
+.pain-item{padding:1.6rem;border-radius:18px;background:var(--panel);border:1px solid var(--line)}
+.pain-item .icon{width:34px;height:34px;color:var(--copper);margin-bottom:1rem}
+.pain-item:nth-child(2) .icon{color:var(--violet)}
+.pain-item:nth-child(3) .icon{color:var(--teal)}
+.pain-item p{color:var(--muted);margin-top:.5rem;font-size:.97rem}
+@media (min-width:860px){.pain-grid{grid-template-columns:1.2fr 1fr 1fr}.pain-item:first-child{grid-row:span 1}}
+
+/* ---------- услуги ---------- */
+.services-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem 3rem}
+.services-head p{color:var(--muted);max-width:44ch}
+.bento{display:grid;gap:1rem;margin-top:2.5rem}
+.svc{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.svc img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.svc-body{padding:1.4rem 1.4rem 1.6rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+.svc-body p{color:var(--muted);font-size:.95rem}
+.svc-meta{display:flex;flex-wrap:wrap;gap:.3rem 1.6rem;margin-top:auto;padding-top:.8rem;border-top:1px solid var(--line);font-size:.9rem}
+.svc-meta div{display:flex;flex-direction:column}
+.svc-meta dt{color:var(--muted);font-size:.78rem}
+.svc-meta dd{font-weight:600}
+.svc--main{border:1.5px solid transparent;background:linear-gradient(var(--panel-2),var(--panel-2)) padding-box,var(--cham) border-box}
+.svc--main h3{font-size:clamp(1.3rem,1rem + 1vw,1.75rem);font-weight:800;text-transform:uppercase;hyphens:auto;overflow-wrap:anywhere}
+.svc-tag{align-self:flex-start;font-size:.75rem;font-weight:600;padding:.3rem .7rem;border-radius:999px;background:var(--cham);color:var(--bg)}
+.svc-note{margin-top:1.4rem;color:var(--muted);font-size:.92rem;display:flex;gap:.6rem}
+.svc-note .icon{margin-top:.2rem}
+@media (min-width:720px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.svc--main{grid-column:1 / -1}.svc--main img{aspect-ratio:16/8}}
+@media (min-width:1080px){
+  .bento{grid-template-columns:1.35fr 1fr 1fr}
+  .svc--main{grid-column:1;grid-row:1 / span 2}
+  .svc--main img{aspect-ratio:auto;flex:1;min-height:0;height:100%;max-height:480px}
+  .svc--wide{grid-column:2 / span 2;flex-direction:row}
+  .svc--wide img{width:46%;aspect-ratio:auto}
+}
+
+/* ---------- до/после ---------- */
+.ba{position:relative;margin-top:2.5rem;overflow:hidden;aspect-ratio:4/3;background:#000;border-radius:22px;user-select:none;-webkit-user-select:none;touch-action:pan-y;border:1px solid var(--line)}
+@media (min-width:720px){.ba{aspect-ratio:16/8}}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba-clip{position:absolute;inset:0;overflow:hidden;transform:translateX(calc((var(--p) - 100) * 1%))}
+.ba-inner{position:absolute;inset:0;transform:translateX(calc((100 - var(--p)) * 1%))}
+.ba-inner img{filter:saturate(.55) contrast(.72) brightness(1.14)}
+.ba-haze{position:absolute;inset:0;background:rgba(190,198,205,.2)}
+.ba-swirl{--x:38%;--y:46%;--r:34%;position:absolute;inset:0;mix-blend-mode:screen;opacity:.75;
+  background:repeating-radial-gradient(circle at var(--x) var(--y),transparent 0 3px,rgba(255,255,255,.5) 3px 3.6px,transparent 3.6px 5px);
+  -webkit-mask-image:radial-gradient(circle at var(--x) var(--y),#000 0,rgba(0,0,0,.6) calc(var(--r) * .5),transparent var(--r));
+          mask-image:radial-gradient(circle at var(--x) var(--y),#000 0,rgba(0,0,0,.6) calc(var(--r) * .5),transparent var(--r))}
+.ba-swirl--2{--x:12%;--y:14%;--r:26%;opacity:.8}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:3;touch-action:pan-y}
+.ba-handle{position:absolute;inset:0;transform:translateX(calc((var(--p) - 50) * 1%));pointer-events:none;z-index:2}
+.ba-handle::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:var(--cham)}
+.ba-knob{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:var(--cham);color:var(--bg);display:grid;place-items:center;
+  box-shadow:0 0 30px rgba(166,136,236,.6)}
+.ba-knob svg{width:26px;height:26px}
+.ba-range:focus-visible ~ .ba-handle .ba-knob{outline:3px solid #fff;outline-offset:4px}
+.ba-tag{position:absolute;top:1rem;z-index:2;pointer-events:none;background:rgba(11,13,16,.75);color:#fff;font:600 .85rem/1 var(--f);padding:.5rem .8rem;border-radius:999px;letter-spacing:.06em;text-transform:uppercase}
+.ba-tag--before{left:1rem}.ba-tag--after{right:1rem}
+.ba-caption{margin-top:1rem;color:var(--muted);font-size:.88rem}
+
+/* ---------- процесс ---------- */
+.steps{list-style:none;padding:0;display:grid;gap:1.6rem;margin-top:2.5rem;counter-reset:s}
+.steps li{position:relative;padding:1.4rem 1.4rem 1.5rem;border-radius:18px;background:var(--panel);border:1px solid var(--line)}
+.steps li::before{counter-increment:s;content:"0" counter(s);display:block;font:800 2rem/1 var(--f);margin-bottom:.8rem;
+  background:var(--cham);-webkit-background-clip:text;background-clip:text;color:transparent}
+.steps p{color:var(--muted);font-size:.95rem;margin-top:.4rem}
+@media (min-width:960px){.steps{grid-template-columns:repeat(4,1fr)}}
+.process-photo{margin-top:2rem;display:grid;gap:1.2rem;align-items:end}
+.process-photo img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:22px}
+.process-photo figcaption{font:500 clamp(1.05rem,1rem + .4vw,1.3rem)/1.4 var(--f);max-width:30ch;padding-left:1rem;border-left:3px solid var(--violet)}
+@media (min-width:960px){.process-photo{grid-template-columns:7fr 5fr;gap:3rem}}
+
+/* ---------- цены ---------- */
+.prices-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:2.5rem;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.prices-table th,.prices-table td{text-align:left;padding:1.05rem 1.2rem;border-bottom:1px solid var(--line);vertical-align:top}
+.prices-table tbody tr:last-child th,.prices-table tbody tr:last-child td{border-bottom:0}
+.prices-table thead th{font-weight:800;text-transform:uppercase;font-size:.92rem;letter-spacing:.04em;background:var(--panel-2);vertical-align:bottom}
+.prices-table thead small{display:block;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:.78rem;margin-top:.3rem}
+.prices-table tbody th{font-weight:600}
+.prices-table tbody th small{display:block;font-weight:400;color:var(--muted);font-size:.85rem}
+.prices-table td{font-weight:600;white-space:nowrap}
+.prices-table .free td{color:var(--teal)}
+.prices-note{margin-top:1rem;color:var(--muted);font-size:.9rem}
+@media (max-width:719px){
+  .prices-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .prices-table,.prices-table tbody,.prices-table tr,.prices-table th,.prices-table td{display:block}
+  .prices-table tr{padding:1rem 1.1rem;border-bottom:1px solid var(--line)}
+  .prices-table th,.prices-table td{border:0;padding:.2rem 0}
+  .prices-table tbody th{font-size:1.05rem;margin-bottom:.4rem}
+  .prices-table td{display:flex;justify-content:space-between;gap:1rem;white-space:normal}
+  .prices-table td::before{content:attr(data-label);font-weight:400;color:var(--muted)}
+}
+
+/* ---------- отзывы ---------- */
+.rev-grid{display:grid;gap:1rem;margin-top:2.5rem}
+.rev{padding:1.6rem;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+.rev blockquote p{max-width:none}
+.rev footer{margin-top:1rem;font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.3rem 1rem}
+.rev footer b{color:var(--text)}
+.rev--big blockquote{font:500 clamp(1.1rem,1rem + .6vw,1.4rem)/1.5 var(--f)}
+.rev--big{border:1.5px solid transparent;background:linear-gradient(var(--panel-2),var(--panel-2)) padding-box,var(--cham) border-box}
+@media (min-width:960px){.rev-grid{grid-template-columns:1.4fr 1fr}.rev--big{grid-row:span 2;padding:2.4rem;display:flex;flex-direction:column;justify-content:space-between}}
+
+/* ---------- вопросы ---------- */
+.faq-list{margin-top:2.5rem;max-width:880px}
+.faq-list details{border-top:1px solid var(--line)}
+.faq-list details:last-child{border-bottom:1px solid var(--line)}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem 0;font-weight:600;font-size:1.04rem;min-height:44px}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .icon{transition:transform .3s var(--ease);color:var(--violet)}
+.faq-list details[open] summary .icon{transform:rotate(45deg)}
+.faq-list details p{padding:0 0 1.4rem;color:var(--muted)}
+
+/* ---------- запись ---------- */
+.booking .wrap{display:grid;gap:2.5rem}
+.booking-info{list-style:none;padding:0;margin-top:2rem;display:grid;gap:.8rem}
+.booking-info li{display:flex;gap:.7rem;align-items:flex-start}
+.booking-info .icon{color:var(--violet);margin-top:.2rem}
+.form{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:clamp(1.4rem,3vw,2.4rem);display:grid;gap:.9rem;align-self:start}
+.field{display:grid;gap:.3rem}
+.field label{font-weight:600;font-size:.9rem}
+.field input{font:inherit;color:var(--text);background:var(--bg);border:1.5px solid #3A404A;border-radius:12px;padding:.8rem .95rem;min-height:50px;width:100%}
+.field input::placeholder{color:#7D8590}
+.field input:focus-visible{outline:3px solid var(--teal);outline-offset:1px;border-color:var(--violet)}
+.field input[aria-invalid="true"]{border-color:#F07A8C}
+.field-error{color:#F59AA8;font-size:.85rem;line-height:1.3;min-height:1.3em}
+.form-note{font-size:.85rem;color:var(--muted)}
+.form .btn{width:100%}
+.form-done{display:none;padding:1.2rem;border-radius:14px;background:var(--bg);border:1.5px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,var(--cham) border-box}
+.form.is-done .form-done{display:block}
+.form.is-done .field,.form.is-done .btn,.form.is-done .form-note{display:none}
+@media (min-width:960px){.booking .wrap{grid-template-columns:1fr 1fr;gap:5rem;align-items:center}}
+
+/* ---------- подвал ---------- */
+.footer{border-top:1px solid var(--line);padding-block:3.5rem 2.5rem;font-size:.92rem;color:var(--muted)}
+.footer .wrap{display:grid;gap:2rem}
+.footer h2{font-size:.82rem;letter-spacing:.08em;color:var(--text);margin-bottom:.6rem}
+.footer .logo{color:var(--text)}
+.demo-note{border-top:1px solid var(--line);padding-top:1.2rem;font-size:.85rem;max-width:none}
+@media (min-width:720px){.footer .wrap{grid-template-columns:1.3fr 1fr 1fr 1fr}.demo-note{grid-column:1 / -1}}
+
+/* ---------- телефон: короче страница, кнопка записи всегда под пальцем ----------
+   Услуги, шаги и отзывы на узком экране листаются вбок (карусель на CSS,
+   scroll-snap: карточка сама встаёт на место). Страница становится вдвое короче,
+   а карточки остаются крупными. */
+.rail-hint{display:none}
+.mbar{display:none}
+@media (max-width:719px){
+  .rail{position:relative;display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:84%;gap:.8rem;
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);
+    margin-inline:calc(-1 * var(--pad));padding:0 var(--pad) .6rem;scrollbar-width:none}
+  .rail::-webkit-scrollbar{display:none}
+  .rail > *{scroll-snap-align:start}
+  .steps.rail{grid-auto-columns:70%}
+  .rail-hint{display:flex;align-items:center;gap:.4rem;margin-top:1.6rem;color:var(--muted);font-size:.85rem}
+  .rail-hint .icon{width:18px;height:18px;color:var(--violet)}
+  .rail-hint + .rail{margin-top:.8rem}
+  .svc img{aspect-ratio:16/10}
+  .rev--big blockquote{font-size:1.05rem}
+
+  /* «боль» компактнее: значок слева от заголовка */
+  .pain-grid{gap:.7rem;margin-top:1.8rem}
+  .pain-item{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;padding:1.15rem 1.2rem}
+  .pain-item .icon{grid-row:span 2;width:28px;height:28px;margin:0}
+  .pain-item p{margin-top:0;font-size:.93rem}
+
+  /* ссылки в подвале: удобная высота для пальца */
+  .footer .u-link,.s2-in .u-link,.booking-info .u-link{padding-block:.55rem .6rem}
+  .footer{padding-bottom:6.5rem}
+
+  /* нижняя панель: позвонить и записаться */
+  .mbar{display:flex;gap:.6rem;position:fixed;left:.7rem;right:.7rem;bottom:calc(.7rem + env(safe-area-inset-bottom));z-index:70;
+    padding:.5rem;border-radius:999px;background:rgba(20,23,28,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.6);
+    transform:translateY(160%);transition:transform .5s var(--ease)}
+  .mbar.is-on{transform:none}
+  .mbar .btn{flex:1;justify-content:center}
+  .mbar-call{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.25);color:var(--text)}
+  .mbar-call .icon{width:20px;height:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important;animation:none !important}
+  .scene-inner{transform:none !important;opacity:1 !important}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+  <symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z"/><path d="M6 18h12M6 14h12"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-fog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-dasharray="2.5 3"/><circle cx="12" cy="12" r="4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-lr" viewBox="0 0 24 24"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m7 4 13 8-13 8z"/></symbol>
+  <linearGradient id="g-cham" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E0A273"/><stop offset=".5" stop-color="#A688EC"/><stop offset="1" stop-color="#5ED0DA"/></linearGradient>
+</svg>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="header" id="top-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="«Лак», детейлинг-студия, наверх">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-drop" fill="url(#g-cham)"/></svg>ЛАК
+      <small>детейлинг Тверь</small>
+    </a>
+    <nav class="nav sib sib-x" aria-label="Разделы">
+      <a class="u-link" href="#services">Услуги</a>
+      <a class="u-link" href="#result">До и после</a>
+      <a class="u-link" href="#prices">Цены</a>
+      <a class="u-link" href="#faq">Вопросы</a>
+    </nav>
+    <a class="header-phone" href="tel:+79000000000" aria-label="Позвонить: +7 (900) 000-00-00">
+      <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span>+7 (900) 000-00-00</span>
+    </a>
+    <a class="btn btn--sm" href="#booking">Записаться<span class="hide-s">&nbsp;на осмотр</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="intro" id="top">
+    <section class="slide1" aria-labelledby="hero-h">
+      <video class="stage-video" autoplay muted loop playsinline preload="metadata" poster="images/hero-gloss-poster.webp" aria-hidden="true">
+        <source src="media/hero-gloss.mp4" type="video/mp4">
+      </video>
+      <div class="stage-veil" aria-hidden="true"></div>
+      <button class="video-toggle" type="button" aria-label="Остановить видео на фоне"><svg class="icon" aria-hidden="true"><use href="#i-pause"/></svg></button>
+      <div class="wrap hero-in">
+        <h1 id="hero-h" class="cham">Кузов снова блестит так, что в нём видно небо</h1>
+        <p class="lead">Убираем паутинку и матовость после автомоек, наносим керамику, чистим салон. Перед работой мастер бесплатно замеряет лак и называет точную цену.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#booking">Записаться на осмотр</a>
+          <a class="btn btn--ghost" href="#prices">Смотреть цены</a>
+        </div>
+        <ul class="hero-stats">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>20 минут</b><span>бесплатный осмотр</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg><div><b>Замер лака</b><span>толщиномером до начала работ</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-warehouse"/></svg><div><b>3 тёплых бокса</b><span>со светом для полировки</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>6 месяцев</b><span>до бесплатного осмотра керамики</span></div></li>
+        </ul>
+      </div>
+      <div class="slide1-shade" aria-hidden="true"></div>
+    </section>
+
+    <section class="slide2" id="depth" aria-labelledby="ch-h">
+      <img class="s2-bg" src="images/hero-blue-hood.webp" width="1600" height="1068" alt="Синий капот в каплях воды после полировки и керамики" loading="lazy">
+      <div class="s2-veil" aria-hidden="true"></div>
+      <p class="chapter-ghost" aria-hidden="true">ЛАК</p>
+      <div class="wrap s2-in">
+        <h2 class="chapter-title" id="ch-h"><span>Глубина</span><span class="cham">цвета</span></h2>
+        <p>Полировка в два этапа снимает паутинку и следы щёток, и цвет снова становится глубоким. 1–2 дня, от 14&nbsp;000&nbsp;₽.</p>
+        <a class="u-link" href="#services">Что входит в полировку</a>
+      </div>
+    </section>
+  </div>
+
+  <section class="section scene scene-card" aria-labelledby="pain-h">
+    <div class="wrap scene-inner">
+      <h2 id="pain-h">Знакомо, если машине больше <span class="cham">трёх лет</span></h2>
+      <div class="pain-grid">
+        <div class="pain-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-fog"/></svg>
+          <h3>Кузов потускнел</h3>
+          <p>Щётки на автомойке оставляют тысячи мелких царапин. Цвет становится сероватым, даже когда машина только что вымыта.</p>
+        </div>
+        <div class="pain-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg>
+          <h3>На солнце видны круги</h3>
+          <p>В тени их не заметно, а на солнце вокруг каждого блика расходятся кольца. Это паутинка, и она убирается полировкой.</p>
+        </div>
+        <div class="pain-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg>
+          <h3>В салоне держится запах</h3>
+          <p>Табак, собака, сырость после протечки. Ароматизатор перебивает запах на день, химчистка убирает то, что пахнет.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scene" id="services" aria-labelledby="svc-h" style="padding-top:0">
+    <div class="wrap scene-inner">
+      <div class="services-head">
+        <h2 id="svc-h">Что сделаем с машиной</h2>
+        <p>Цены для седанов класса B–C. Для кроссоверов и внедорожников смотрите таблицу ниже.</p>
+      </div>
+      <p class="rail-hint" aria-hidden="true"><svg class="icon"><use href="#i-lr"/></svg>Листайте вбок</p>
+      <div class="bento rail">
+        <article class="svc svc--main">
+          <img src="images/polish-process.webp" width="1200" height="1600" loading="lazy"
+               alt="Мастер полирует чёрный кузов машинкой, в лаке отражаются лампы бокса">
+          <div class="svc-body">
+            <span class="svc-tag">С неё начинают чаще всего</span>
+            <h3>Восстановительная полировка</h3>
+            <p>Мойка, очистка кузова глиной, замер толщины лака, полировка в два этапа, финишная доводка и защитный воск на месяц. Уходят паутинка, следы щёток и матовость.</p>
+            <dl class="svc-meta"><div><dt>Срок</dt><dd>1–2 дня</dd></div><div><dt>Цена</dt><dd>от 14&nbsp;000&nbsp;₽</dd></div></dl>
+          </div>
+        </article>
+        <article class="svc">
+          <img src="images/ceramic-beading-blue.webp" width="1600" height="1280" loading="lazy"
+               alt="Вода собирается в круглые капли на синем лаке: так работает керамика">
+          <div class="svc-body">
+            <h3>Керамика, 2 слоя</h3>
+            <p>Наносим после полировки и сушим 12 часов под ИК-лампами. Держится до двух лет при ручной мойке. Через полгода бесплатный осмотр.</p>
+            <dl class="svc-meta"><div><dt>Срок</dt><dd>1 день</dd></div><div><dt>Цена</dt><dd>от 16&nbsp;000&nbsp;₽</dd></div></dl>
+          </div>
+        </article>
+        <article class="svc">
+          <img src="images/interior-clean.webp" width="1600" height="899" loading="lazy"
+               alt="Рука в перчатке чистит щёточкой приборную панель салона">
+          <div class="svc-body">
+            <h3>Химчистка салона</h3>
+            <p>Сиденья, потолок, ковры, пластик и багажник. Убираем пятна и запах, в конце сушим салон озоном.</p>
+            <dl class="svc-meta"><div><dt>Срок</dt><dd>6–8 часов</dd></div><div><dt>Цена</dt><dd>от 9&nbsp;000&nbsp;₽</dd></div></dl>
+          </div>
+        </article>
+        <article class="svc svc--wide">
+          <img src="images/film-install.webp" width="1600" height="1066" loading="lazy"
+               alt="Мастер разглаживает прозрачную плёнку на крыле оранжевой машины">
+          <div class="svc-body">
+            <h3>Плёнка на зоны риска</h3>
+            <p>Капот, передний бампер, фары, зеркала и передние крылья. Прозрачный полиуретан принимает на себя камни с трассы, лак под ним остаётся целым.</p>
+            <dl class="svc-meta"><div><dt>Срок</dt><dd>2 дня</dd></div><div><dt>Цена</dt><dd>от 38&nbsp;000&nbsp;₽</dd></div></dl>
+          </div>
+        </article>
+      </div>
+      <p class="svc-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Царапины до грунта полировка не убирает, их исправляет только покраска. Если такая есть, мастер покажет её на осмотре.</p>
+    </div>
+  </section>
+
+  <section class="section scene scene-card" id="result" aria-labelledby="res-h">
+    <div class="wrap scene-inner">
+      <h2 id="res-h">Что меняет <span class="cham">полировка</span></h2>
+      <p class="lead">Слева кузов после пары лет автомоек со щётками, справа после полировки. Потяните ручку.</p>
+      <div class="ba" style="--p:50" data-ba>
+        <img src="images/slider-door.webp" width="1600" height="1066" loading="lazy"
+             alt="Тёмно-серая дверь автомобиля после полировки: глубокий цвет, чёткие капли">
+        <div class="ba-clip" aria-hidden="true">
+          <div class="ba-inner">
+            <img src="images/slider-door.webp" width="1600" height="1066" loading="lazy" alt="">
+            <div class="ba-haze"></div>
+            <div class="ba-swirl"></div>
+            <div class="ba-swirl ba-swirl--2"></div>
+          </div>
+        </div>
+        <input class="ba-range" type="range" min="0" max="100" value="50" step="1"
+               aria-label="Положение ползунка: слева до полировки, справа после">
+        <div class="ba-handle" aria-hidden="true"><span class="ba-knob"><svg class="icon"><use href="#i-lr"/></svg></span></div>
+        <span class="ba-tag ba-tag--before" aria-hidden="true">До</span>
+        <span class="ba-tag ba-tag--after" aria-hidden="true">После</span>
+      </div>
+      <p class="ba-caption">Иллюстрация: состояние «до» сделано обработкой того же снимка, это не фото конкретной машины.</p>
+    </div>
+  </section>
+
+  <section class="section scene" aria-labelledby="steps-h" style="padding-top:0">
+    <div class="wrap scene-inner">
+      <h2 id="steps-h">Как проходит запись и работа</h2>
+      <p class="rail-hint" aria-hidden="true"><svg class="icon"><use href="#i-lr"/></svg>Листайте вбок</p>
+      <ol class="steps rail">
+        <li><h3>Заявка</h3><p>Оставляете телефон на сайте или звоните. Администратор перезванивает в течение часа.</p></li>
+        <li><h3>Осмотр</h3><p>20 минут в студии. Мастер замеряет лак толщиномером и называет точную цену.</p></li>
+        <li><h3>Работа</h3><p>Машина стоит в тёплом боксе. Фото процесса присылаем в мессенджер.</p></li>
+        <li><h3>Выдача</h3><p>Показываем кузов при дневном свете и под лампой, отдаём памятку по уходу.</p></li>
+      </ol>
+      <figure class="process-photo">
+        <img src="images/polisher-detail.webp" width="1280" height="1600" loading="lazy"
+             alt="Полировальная машинка с мягким кругом на тёмном кузове, края заклеены малярным скотчем">
+        <figcaption>Перед полировкой заклеиваем молдинги и стыки малярным скотчем, чтобы круг не задел пластик и резину.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section scene scene-card" id="prices" aria-labelledby="pr-h">
+    <div class="wrap scene-inner">
+      <h2 id="pr-h">Цены по классам машин</h2>
+      <p class="lead">Точную цену мастер называет на осмотре. После этого она не меняется.</p>
+      <table class="prices-table">
+        <caption class="sr-only">Цены на услуги в рублях, от</caption>
+        <thead>
+          <tr>
+            <th scope="col">Услуга</th>
+            <th scope="col">Класс 1<small>Solaris, Polo, Octavia</small></th>
+            <th scope="col">Класс 2<small>Camry, Tiguan, Sportage</small></th>
+            <th scope="col">Класс 3<small>Land Cruiser, X5, Multivan</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Восстановительная полировка<small>1–2 дня</small></th><td data-label="Класс 1">от 14&nbsp;000&nbsp;₽</td><td data-label="Класс 2">от 17&nbsp;000&nbsp;₽</td><td data-label="Класс 3">от 21&nbsp;000&nbsp;₽</td></tr>
+          <tr><th scope="row">Керамика, 2 слоя<small>1 день, после полировки</small></th><td data-label="Класс 1">от 16&nbsp;000&nbsp;₽</td><td data-label="Класс 2">от 19&nbsp;000&nbsp;₽</td><td data-label="Класс 3">от 24&nbsp;000&nbsp;₽</td></tr>
+          <tr><th scope="row">Химчистка салона<small>6–8 часов</small></th><td data-label="Класс 1">от 9&nbsp;000&nbsp;₽</td><td data-label="Класс 2">от 11&nbsp;000&nbsp;₽</td><td data-label="Класс 3">от 14&nbsp;000&nbsp;₽</td></tr>
+          <tr><th scope="row">Плёнка на зоны риска<small>2 дня</small></th><td data-label="Класс 1">от 38&nbsp;000&nbsp;₽</td><td data-label="Класс 2">от 44&nbsp;000&nbsp;₽</td><td data-label="Класс 3">от 52&nbsp;000&nbsp;₽</td></tr>
+          <tr class="free"><th scope="row">Осмотр с замером лака<small>20 минут</small></th><td data-label="Класс 1">бесплатно</td><td data-label="Класс 2">бесплатно</td><td data-label="Класс 3">бесплатно</td></tr>
+        </tbody>
+      </table>
+      <p class="prices-note">Класс 1: Solaris, Polo, Octavia. Класс 2: Camry, Tiguan, Sportage. Класс 3: Land Cruiser, X5, Multivan. Марки названы только для примера размера машины.</p>
+    </div>
+  </section>
+
+  <section class="section scene" aria-labelledby="rev-h" style="padding-top:0">
+    <div class="wrap scene-inner">
+      <h2 id="rev-h">Что говорят владельцы</h2>
+      <p class="rail-hint" aria-hidden="true"><svg class="icon"><use href="#i-lr"/></svg>Листайте вбок</p>
+      <div class="rev-grid rail">
+        <figure class="rev rev--big">
+          <blockquote><p>После моек со щётками кузов был в кругах, на солнце смотреть стыдно. Артём сначала показал на толщиномере, где лака мало, и там полировал аккуратно. Забрал через день, соседи спросили, не перекрашивал ли.</p></blockquote>
+          <footer><b>Сергей, Octavia 2017</b><span>Пример отзыва</span></footer>
+        </figure>
+        <figure class="rev">
+          <blockquote><p>Купила машину после курильщика. Сделали химчистку за день, запах ушёл совсем, даже в жару не вернулся.</p></blockquote>
+          <footer><b>Ольга, Sportage</b><span>Пример отзыва</span></footer>
+        </figure>
+        <figure class="rev">
+          <blockquote><p>Заклеил капот и бампер, ездим по трассе М-10 каждую неделю. Сколы на плёнке есть, на лаке нет ни одного.</p></blockquote>
+          <footer><b>Игорь, новая Camry</b><span>Пример отзыва</span></footer>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scene" id="faq" aria-labelledby="faq-h" style="padding-top:0">
+    <div class="wrap scene-inner">
+      <h2 id="faq-h">Частые вопросы</h2>
+      <div class="faq-list">
+        <details><summary>Полировка уберёт все царапины?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Паутинку и мелкие царапины уберёт. Если ноготь цепляется за царапину, скорее всего, она до грунта. Это видно на осмотре.</p></details>
+        <details><summary>Почему цена «от»?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Точная цена зависит от состояния лака и размера машины. Мастер называет её на осмотре, дальше она не меняется.</p></details>
+        <details><summary>Сколько держится керамика?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>До двух лет при ручной мойке. Через 6 месяцев приглашаем на бесплатный осмотр.</p></details>
+        <details><summary>Можно оставить машину утром и забрать вечером?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>С химчисткой да, она занимает один день. Полировка и плёнка занимают 1–2 дня.</p></details>
+        <details><summary>Полировка не истончит лак?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Снимаем несколько микрон. Перед работой замеряем толщину, тонкие места проходим мягкой пастой или не трогаем.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scene scene-card booking" id="booking" aria-labelledby="book-h">
+    <div class="wrap scene-inner">
+      <div>
+        <h2 id="book-h">Запишитесь на <span class="cham">бесплатный осмотр</span></h2>
+        <p class="lead">Оставьте телефон. Марина перезвонит в течение часа и подберёт время. Осмотр занимает 20 минут и ни к чему не обязывает.</p>
+        <ul class="booking-info">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Волоколамское шоссе, Тверь</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>пн–сб 9:00–20:00, вс 10:00–18:00</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><a class="u-link" href="tel:+79000000000">+7 (900) 000-00-00</a></li>
+        </ul>
+      </div>
+      <form class="form" novalidate data-demo-form>
+        <div class="field">
+          <label for="f-name">Имя</label>
+          <input id="f-name" name="name" autocomplete="given-name" required aria-describedby="e-name">
+          <span class="field-error" id="e-name"></span>
+        </div>
+        <div class="field">
+          <label for="f-phone">Телефон</label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required aria-describedby="e-phone">
+          <span class="field-error" id="e-phone"></span>
+        </div>
+        <div class="field">
+          <label for="f-car">Марка и модель машины</label>
+          <input id="f-car" name="car" placeholder="Например, Kia Rio" required aria-describedby="e-car">
+          <span class="field-error" id="e-car"></span>
+        </div>
+        <button class="btn" type="submit">Записаться на осмотр</button>
+        <p class="form-note">Это демо-сайт: заявка никуда не отправляется.</p>
+        <div class="form-done" role="status" aria-live="polite" tabindex="-1"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-drop" fill="url(#g-cham)"/></svg>ЛАК<small>детейлинг Тверь</small></a>
+      <p style="margin-top:1rem">Полировка, керамика, химчистка и плёнка. Бесплатный осмотр с замером лака.</p>
+    </div>
+    <div>
+      <h2>Контакты</h2>
+      <p>Волоколамское шоссе, Тверь<br>пн–сб 9:00–20:00, вс 10:00–18:00</p>
+      <nav class="sib sib-y" aria-label="Телефон"><a class="u-link" href="tel:+79000000000">+7 (900) 000-00-00</a></nav>
+    </div>
+    <div>
+      <h2>Разделы</h2>
+      <nav class="sib sib-y" aria-label="Разделы в подвале">
+        <a class="u-link" href="#services">Услуги</a>
+        <a class="u-link" href="#result">До и после</a>
+        <a class="u-link" href="#prices">Цены</a>
+        <a class="u-link" href="#faq">Вопросы</a>
+      </nav>
+    </div>
+    <div>
+      <h2>Запись</h2>
+      <nav class="sib sib-y" aria-label="Запись"><a class="u-link" href="#booking">Записаться на осмотр</a></nav>
+    </div>
+    <p class="demo-note">Демо-проект, компания вымышлена. Номер телефона ненастоящий. Фото: Unsplash, видео: Pexels, авторы указаны в photo-credits.md.</p>
+  </div>
+</footer>
+
+<div class="mbar" aria-label="Быстрая запись">
+  <a class="mbar-call" href="tel:+79000000000" aria-label="Позвонить: +7 (900) 000-00-00"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></a>
+  <a class="btn btn--sm" href="#booking">Записаться на осмотр</a>
+</div>
+
+<script>
+(function () {
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- шапка темнеет после первого экрана ---------- */
+  var header = document.getElementById('top-header');
+  function onScrollHeader() { header.classList.toggle('is-solid', window.scrollY > 40); }
+  onScrollHeader();
+  window.addEventListener('scroll', onScrollHeader, { passive: true });
+
+  /* ---------- видео на фоне: кнопка паузы и уважение к «меньше движения» ---------- */
+  var video = document.querySelector('.stage-video'), toggle = document.querySelector('.video-toggle');
+  function setPaused(p) {
+    if (p) video.pause(); else video.play().catch(function () {});
+    toggle.setAttribute('aria-label', p ? 'Включить видео на фоне' : 'Остановить видео на фоне');
+    toggle.querySelector('use').setAttribute('href', p ? '#i-play' : '#i-pause');
+  }
+  var userPaused = calm;
+  if (calm) { video.removeAttribute('autoplay'); setPaused(true); }
+  toggle.addEventListener('click', function () { userPaused = !video.paused; setPaused(userPaused); });
+
+  /* ---------- два слайда первого экрана и въезд остальных экранов ---------- */
+  var slide1 = document.querySelector('.slide1');
+  var slide2 = document.querySelector('.slide2');
+  var shade = slide1.querySelector('.slide1-shade');
+  var s2bg = slide2.querySelector('.s2-bg');
+  var s2parts = Array.prototype.slice.call(slide2.querySelectorAll('.chapter-title span, .s2-in > p, .s2-in > .u-link'));
+  var s2ghost = slide2.querySelector('.chapter-ghost');
+  var cssScroll = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
+  var scenes = Array.prototype.slice.call(document.querySelectorAll('.scene'));
+  var wide = window.matchMedia('(min-width: 960px)');
+  var ticking = false;
+  function clamp(v) { return Math.min(Math.max(v, 0), 1); }
+  function seg(p, a, b) { return clamp((p - a) / (b - a)); }      // 0..1 внутри отрезка [a, b]
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  // если первый слайд выше экрана (низкий телефон), он «прилипает» нижним краем, и ничего не обрезается
+  function fitSticky() { slide1.style.top = Math.min(0, window.innerHeight - slide1.offsetHeight) + 'px'; }
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    if (!calm && !cssScroll) {
+      // запасной вариант для браузеров без animation-timeline: то же самое скриптом
+      var k = clamp((vh - slide2.getBoundingClientRect().top) / vh);
+      slide1.style.transform = 'scale(' + (1 - 0.1 * k).toFixed(4) + ') translateY(' + (-4 * k).toFixed(2) + '%)';
+      shade.style.opacity = (0.8 * k).toFixed(3);
+      s2bg.style.transform = 'translateY(' + (-10 * (1 - k)).toFixed(2) + '%) scale(' + (1.08 - 0.08 * k).toFixed(4) + ')';
+      s2ghost.style.transform = 'translateX(' + (18 * (1 - ease(seg(k, 0.15, 1)))).toFixed(2) + 'vw)';
+      s2ghost.style.opacity = ease(seg(k, 0.15, 1)).toFixed(3);
+      s2parts.forEach(function (el, i) {
+        var e = ease(seg(k, 0.35 + i * 0.09, 0.85 + i * 0.05));
+        el.style.transform = 'translateY(' + (55 * (1 - e)).toFixed(2) + '%)';
+        el.style.opacity = e.toFixed(3);
+      });
+    }
+    // остальные экраны въезжают снизу (только на компьютере)
+    scenes.forEach(function (el) {
+      var s = el.querySelector('.scene-inner');
+      if (calm || !wide.matches) { s.style.transform = ''; s.style.opacity = ''; return; }
+      var e = clamp((vh - el.getBoundingClientRect().top) / (vh * 0.45));
+      s.style.transform = 'translateY(' + ((1 - e) * 7).toFixed(2) + 'vh) scale(' + (0.965 + 0.035 * e).toFixed(4) + ')';
+      s.style.opacity = (0.3 + 0.7 * e).toFixed(3);
+    });
+    // видео не тратит силы, когда его закрыл второй слайд
+    if (!userPaused) {
+      var hidden = slide2.getBoundingClientRect().top <= 1;
+      if (hidden && !video.paused) video.pause();
+      else if (!hidden && video.paused) video.play().catch(function () {});
+    }
+  }
+  function requestUpdate() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', function () { fitSticky(); requestUpdate(); });
+  fitSticky();
+  update();
+
+  /* ---------- нижняя панель на телефоне: видна после первого экрана, прячется у формы ---------- */
+  var mbar = document.querySelector('.mbar'), booking = document.getElementById('booking'), foot = document.querySelector('.footer');
+  if (mbar) {
+    var bookSeen = false;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.target === booking) bookSeen = e.isIntersecting; }); toggleBar(); },
+        { threshold: 0.15 }).observe(booking);
+    }
+    function toggleBar() { mbar.classList.toggle('is-on', window.scrollY > window.innerHeight * 0.9 && !bookSeen); }
+    window.addEventListener('scroll', toggleBar, { passive: true });
+    toggleBar();
+  }
+
+  /* ---------- ползунок «до / после» ---------- */
+  document.querySelectorAll('[data-ba]').forEach(function (ba) {
+    var range = ba.querySelector('.ba-range');
+    var touched = false;
+    function set(v) { ba.style.setProperty('--p', v); }
+    range.addEventListener('input', function () { touched = true; set(range.value); });
+    if (calm || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      var t0 = null, dur = 1600;
+      function step(t) {
+        if (touched) return;
+        if (!t0) t0 = t;
+        var k = Math.min((t - t0) / dur, 1);
+        set((50 - 22 * Math.sin(Math.PI * k) * (1 - k * 0.15)).toFixed(2));
+        if (k < 1) requestAnimationFrame(step); else set(50);
+      }
+      requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    io.observe(ba);
+  });
+
+  /* ---------- демо-форма ---------- */
+  document.querySelectorAll('[data-demo-form]').forEach(function (form) {
+    var btn = form.querySelector('button[type="submit"]');
+    var done = form.querySelector('.form-done');
+    var rules = {
+      name: function (v) { return v.trim().length >= 2 ? '' : 'Напишите имя, хотя бы две буквы'; },
+      phone: function (v) { var d = v.replace(/\D/g, ''); return (d.length === 11 || d.length === 10) ? '' : 'Нужен номер из 10–11 цифр, например +7 900 000-00-00'; },
+      car: function (v) { return v.trim().length >= 2 ? '' : 'Напишите марку и модель'; }
+    };
+    function check(input) {
+      var msg = rules[input.name] ? rules[input.name](input.value) : '';
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      document.getElementById(input.getAttribute('aria-describedby')).textContent = msg;
+      return !msg;
+    }
+    form.querySelectorAll('input').forEach(function (i) { i.addEventListener('blur', function () { if (i.value) check(i); }); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var bad = null;
+      form.querySelectorAll('input').forEach(function (i) { if (!check(i) && !bad) bad = i; });
+      if (bad) { bad.focus(); return; }
+      btn.disabled = true;
+      btn.textContent = 'Отправляем…';
+      setTimeout(function () {
+        var name = form.querySelector('[name="name"]').value.trim();
+        done.textContent = 'Спасибо, ' + name + '! Это демо-сайт, заявка никуда не уходит. На настоящем сайте Марина перезвонила бы в течение часа.';
+        form.classList.add('is-done');
+        done.focus();
+      }, 1200);
+    });
+  });
+})();
+</script>
+</body>
+</html>
