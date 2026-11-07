@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Портфолио: сайты для местного бизнеса</title>
-<meta name="description" content="Сайт клуба каратэ PRIDE (kckpride.ru) и два демо-проекта: лендинг детейлинг-студии с онлайн-записью и многостраничный сайт студии пилатеса с расписанием.">
+<title>Портфолио: сайты и приложения для местного бизнеса</title>
+<meta name="description" content="Сайт клуба каратэ PRIDE (kckpride.ru), два демо-сайта с онлайн-записью для детейлинг-студии и студии пилатеса и веб-приложение «Касса клуба» для учёта денег спортивного клуба.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
@@ -45,6 +45,7 @@ h1 span{background:var(--cham);-webkit-background-clip:text;background-clip:text
 .shot-phone{position:absolute;right:4%;bottom:0;width:23%;border-radius:18px;overflow:hidden;border:4px solid #0c0b0a;box-shadow:0 20px 50px -10px rgba(0,0,0,.8)}
 .shot-phone img{width:100%;aspect-ratio:300/649;object-fit:cover}
 .proj:hover .shot-desk img{transform:scale(1.03)}
+.shots-app{padding-bottom:0}   /* у приложения на обложке уже три телефона, отдельный снимок не нужен */
 .num{font:300 clamp(3rem,2rem + 3vw,5rem)/1 var(--f-big);color:transparent;-webkit-text-stroke:1px rgba(239,234,229,.35)}
 .proj h2{font:400 clamp(1.8rem,1.2rem + 2vw,2.8rem)/1.05 var(--f-big);text-transform:uppercase;margin-top:.6rem}
 .type{color:var(--accent);font-weight:500;margin-top:.4rem}
@@ -79,8 +80,8 @@ h1 span{background:var(--cham);-webkit-background-clip:text;background-clip:text
 <main>
   <header class="top wrap">
     <p class="kicker">Портфолио</p>
-    <h1>Сайты, на которых <span>записываются</span></h1>
-    <p>Сайт для настоящего клуба каратэ и два демо-проекта для местного бизнеса. Каждый работает на телефоне и на компьютере, у каждого онлайн-запись.</p>
+    <h1>Сайты и приложения, которыми <span>пользуются</span></h1>
+    <p>Сайт для настоящего клуба каратэ, два демо-сайта с онлайн-записью для местного бизнеса и веб-приложение, в котором спортивный клуб ведёт свои деньги. Всё работает на телефоне и на компьютере.</p>
   </header>
 
   <div class="projects wrap">
@@ -140,11 +141,29 @@ h1 span{background:var(--cham);-webkit-background-clip:text;background-clip:text
         <a class="btn" href="opora-studio/">Открыть сайт</a>
       </div>
     </article>
+
+    <article class="proj">
+      <a class="shots shots-app" href="kassa-demo/" aria-label="Открыть демо «Кассы клуба»">
+        <div class="shot-desk"><img src="covers/kassa.webp" width="1200" height="750" alt="Три экрана приложения «Касса клуба» на телефоне: история записей, добавление расхода и графики" loading="lazy"></div>
+      </a>
+      <div>
+        <p class="num" aria-hidden="true">04</p>
+        <h2>«Касса клуба»</h2>
+        <p class="type">Веб-приложение: доходы и расходы спортивного клуба</p>
+        <ul>
+          <li>Общая касса клуба и личные траты каждого. Личное видит только владелец: это проверяет сервер, а не экран</li>
+          <li>Запись за два-три нажатия. Без интернета запись ждёт на телефоне и отправляется сама</li>
+          <li>Графики по категориям и месяцам, история с поиском, выгрузка в Excel</li>
+        </ul>
+        <div class="tags"><span>Приложение на телефон</span><span>Google Таблица вместо сервера</span><span>Работает без интернета</span></div>
+        <a class="btn" href="kassa-demo/">Открыть демо</a>
+      </div>
+    </article>
   </div>
 </main>
 <footer class="foot">
   <div class="wrap">
-    <p>PRIDE: настоящий клуб, сайт работает на kckpride.ru. Компании «Лак» и «Опора» вымышлены, сайты сделаны для портфолио. Телефоны ненастоящие, заявки никуда не уходят. Фото: Unsplash, видео: Pexels, авторы указаны на каждом сайте в файле photo-credits.md.</p>
+    <p>PRIDE: настоящий клуб, сайт работает на kckpride.ru. Компании «Лак» и «Опора» вымышлены, сайты сделаны для портфолио. Телефоны ненастоящие, заявки никуда не уходят. Фото: Unsplash, видео: Pexels, авторы указаны на каждом сайте в файле photo-credits.md. «Касса клуба» показана в демо-версии: люди и суммы вымышленные, записи хранятся только в браузере посетителя.</p>
   </div>
 </footer>
 </body>
